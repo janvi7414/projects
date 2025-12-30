@@ -35,3 +35,10 @@ in .env
     NODE_ENV=production → App is live
 
     Never deploy with NODE_ENV=development
+
+
+--- client/----
+
+-npm create vite@latest client
+-cd client
+-npm install axios react-router-dom
