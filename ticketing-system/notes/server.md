@@ -6,4 +6,10 @@
 
     "201" for successful creation
 
--
+- Any IP address can make a request to your server But only your server can make a request to the database Your server does NOT blindly accept everything.
+It checks:
+    Login (username/password)
+    JWT token
+    Role (user, admin)
+    Rate limits
+    Validation
