@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
+      <Routes className="min-h-screen bg-gray-50 py-8">
         <Route path="/" element={<CreateTicket />} />
         <Route path="/tickets" element={<TicketList />} />
       </Routes>

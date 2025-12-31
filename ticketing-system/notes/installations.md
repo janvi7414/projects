@@ -42,3 +42,10 @@ in .env
 -npm create vite@latest client
 -cd client
 -npm install axios react-router-dom
+# for UI
+-npm install @mui/material @emotion/react @emotion/styled
+-npm install @mui/icons-material
+-npm install -D tailwindcss postcss autoprefixer
+-npx tailwindcss init -p
+
+
