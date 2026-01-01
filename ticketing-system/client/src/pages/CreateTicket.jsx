@@ -11,7 +11,7 @@ import {
   Typography,
   FormControl,
   InputLabel,
-} from "@mui/material"
+} from "@mui/material";
 
 export default function CreateTicket() {
     const [formData, setFormData] = useState({
@@ -31,17 +31,17 @@ export default function CreateTicket() {
     }
 
     return(
-        <Card className='max-w-xl mx-auto mt-10 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300'>
+        <Card className='max-w-xl mx-auto mt-10 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 '>
             <CardContent>
                 <Typography 
                     variant='h5'
                     component="h2"
-                    className='text-2xl font-bold mb-6 text-gray-900'
+                    className='text-2xl font-bold mb-6 text-gray-900 '
                     >
                     Create New Ticket
                 </Typography>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='form-div'>
                     <Box className='flex flex-col gap-4'>
                         <TextField 
                             fullWidth

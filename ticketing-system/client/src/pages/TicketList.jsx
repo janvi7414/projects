@@ -10,7 +10,7 @@ useEffect(() => {
 
   return (
     <ul>
-        {tickets.map(ticket => (
+        {tickets.map((ticket) => (
             <li>
                 <h3>{ticket.title}</h3>
                 <p>{ticket.description}</p>
@@ -18,7 +18,7 @@ useEffect(() => {
             </li>
         ))}
     </ul>
-  )
+  );
 }
 
 export default TicketList
