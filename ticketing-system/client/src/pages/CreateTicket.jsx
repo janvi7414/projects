@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from "react"
+import Navbar from "../components/Navbar"
 import {
   Card,
   CardContent,
@@ -7,94 +7,152 @@ import {
   Select,
   MenuItem,
   Button,
-  Box,
   Typography,
   FormControl,
   InputLabel,
-} from "@mui/material";
+  Box,
+} from "@mui/material"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
 
 export default function CreateTicket() {
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        priority: "",
-    })
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    priority: "medium",
+    status: "open",
+  })
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log("Ticket submitted:", formData)
-        // sumittion logic
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("Ticket submitted:", formData)
+    setIsSubmitted(true)
 
-    const handleSelectChange = (e) => {
-        setFormData({...formData, priority: e.target.value})
-    }
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setFormData({ title: "", description: "", priority: "medium", status: "open" })
+    }, 3000)
+  }
 
-    return(
-        <Card className='max-w-xl mx-auto mt-10 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 '>
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen pt-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold mb-2">Create Ticket</h1>
+            <p className="text-muted-foreground">Fill out the form below to create a new support ticket</p>
+          </div>
+
+          {/* Success Message */}
+          {isSubmitted && (
+            <Box className="mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-3">
+              <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0" />
+              <Typography className="text-green-500 font-medium">Ticket created successfully!</Typography>
+            </Box>
+          )}
+
+          {/* Ticket Form */}
+          <Card className="p-8 rounded-lg bg-card border border-border space-y-6">
             <CardContent>
-                <Typography 
-                    variant='h5'
-                    component="h2"
-                    className='text-2xl font-bold mb-6 text-gray-900 '
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Title */}
+                <TextField
+                  fullWidth
+                  label="Ticket Title"
+                  name="title"
+                  required
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder="Brief description of the issue"
+                  className="rounded-lg"
+                />
+
+                {/* Description */}
+                <TextField
+                  fullWidth
+                  label="Description"
+                  name="description"
+                  required
+                  multiline
+                  rows={6}
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Provide detailed information about the ticket..."
+                  className="rounded-lg"
+                />
+
+                <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Priority */}
+                  <FormControl fullWidth required className="rounded-lg">
+                    <InputLabel id="priority-label">Priority</InputLabel>
+                    <Select
+                      labelId="priority-label"
+                      name="priority"
+                      value={formData.priority}
+                      onChange={handleChange}
+                      className="rounded-lg"
                     >
-                    Create New Ticket
-                </Typography>
+                      <MenuItem value="low">Low</MenuItem>
+                      <MenuItem value="medium">Medium</MenuItem>
+                      <MenuItem value="high">High</MenuItem>
+                    </Select>
+                  </FormControl>
 
-                <form onSubmit={handleSubmit} className='form-div'>
-                    <Box className='flex flex-col gap-4'>
-                        <TextField 
-                            fullWidth
-                            label="Title"
-                            variant='outlined'
-                            required
-                            value={formData.title}
-                            onChange={(e) => setFormData({...formData, title: e.target.value
-                            })}
-                            placeholder='Enter ticket title'
-                            className='rounded-lg'
-                        />
+                  {/* Status */}
+                  <FormControl fullWidth required className="rounded-lg">
+                    <InputLabel id="status-label">Status</InputLabel>
+                    <Select
+                      labelId="status-label"
+                      name="status"
+                      value={formData.status}
+                      onChange={handleChange}
+                      className="rounded-lg"
+                    >
+                      <MenuItem value="open">Open</MenuItem>
+                      <MenuItem value="in-progress">In Progress</MenuItem>
+                      <MenuItem value="closed">Closed</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
 
-                        <TextField
-                            fullWidth
-                            label="Description"
-                            variant='outlined'
-                            required
-                            multiline
-                            rows={5}
-                            value={formData.description}
-                            onChange={(e) => setFormData({...formData, description: e.target.value})}
-                            placeholder='Describe the issue in detail'
-                            className='rounded-lg'
-                        />
-                        <FormControl fullWidth required className='rounded-lg'>
-                            <InputLabel id="priority-lable">Priority</InputLabel>
-                            <Select
-                                labelId='priority-lable'
-                                value={formData.priority}
-                                label="Priority"
-                                onChange={handleSelectChange}
-                                className='rounded-lg'
-                            >
-                                <MenuItem value="low">Low</MenuItem>
-                                <MenuItem value="medium">Medium</MenuItem>
-                                <MenuItem value="high">High</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'
-                            fullWidth
-                            className='mt-4 py-3 text-lg font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 transition-all duration-200'
-                        >
-                            Submit Ticket
-                        </Button>
-                    </Box>
-                </form>
+                {/* Info Box */}
+                <Box className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-start gap-3">
+                  <AlertCircle className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                  <Typography className="text-sm text-blue-500">
+                    Make sure to provide as much detail as possible to help us resolve your issue quickly.
+                  </Typography>
+                </Box>
+
+                {/* Buttons */}
+                <Box className="flex items-center gap-4">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className="px-6 py-3 rounded-lg font-medium bg-primary hover:bg-primary/90"
+                  >
+                    Create Ticket
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    className="px-6 py-3 rounded-lg font-medium"
+                    onClick={() => setFormData({ title: "", description: "", priority: "medium", status: "open" })}
+                  >
+                    Reset Form
+                  </Button>
+                </Box>
+              </form>
             </CardContent>
-        </Card>
-
-    )
+          </Card>
+        </div>
+      </main>
+    </>
+  )
 }
-

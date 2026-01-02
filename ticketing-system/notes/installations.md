@@ -45,7 +45,8 @@ in .env
 # for UI
 -npm install @mui/material @emotion/react @emotion/styled
 -npm install @mui/icons-material
--npm install -D tailwindcss postcss autoprefixer
--npx tailwindcss init -p
+-npm install tailwindcss @tailwindcss/vite
+- edited vite.config.js with code on official site and imported "@import "tailwindcss";" in index.css
+-npm install lucide-react //for icons
 
 
