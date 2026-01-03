@@ -11,3 +11,42 @@
     - <></> is used to wrap divs instead of <div></div>
     - max-h-80 === max-h-[320px]  1rem =16px and 1rem = h-4
     - overflow: hidden Any content that exceeds the element’s bounds (width or height) is clipped and not visible.
+
+## UI
+Label | Screen breakpoint | Screen type                    | max-w-*           | text-*
+----- | ----------------- | ------------------------------ | ----------------- | ----------------
+sm    | >= 640px          | Large mobile / small tablet    | 384px (24rem)     | 0.875rem (14px)
+md    | >= 768px          | Tablet                         | 448px (28rem)     | 1rem (16px)
+lg    | >= 1024px         | Small laptop                   | 512px (32rem)     | 1.125rem (18px)
+xl    | >= 1280px         | Desktop                        | 576px (36rem)     | 1.25rem (20px)
+2xl   | >= 1536px         | Large desktop                  | 672px (42rem)     | 1.5rem (24px)
+3xl   | -                 | -                              | 768px (48rem)     | 1.875rem (30px)
+7xl   | -                 | -                              | 1280px (80rem)    | 4.5rem (72px)
+
+
+# Home.jsx
+" const filteredTickets = selectedPriority
+    ? tickets.filter((ticket) => ticket.priority === selectedPriority)
+    : tickets
+"
+" {filteredTickets.slice(0, 3).map((ticket) => (
+                <div
+                  key={ticket._id}
+                  className="p-6 rounded-lg bg-card border border-border hover:shadow-lg transition-shadow"
+                >
+"
+
+here 
+filteredTickets = array of tickets filtered 
+.filter((ticket) => ) ticket is added only when ticket.priority === selectedPriority
+.slice(0,3) = shows top 3 tickets
+.map((ticket) => ()) = iterates over those 3 tickets and returns a jsx ui
+
+- inline-block as inline it does not start from new line but as block height, width, margin, etc can be set
+- ${getPriorityColor(ticket.priority)} this returns a css styling which is applied directly inside className 
+- {filteredTickets.length === 0 && (
+    <p> className="text-gray-500 col-span-full">No recent tickets available.</p>
+    )} 
+    here if array is empty then p is rendered 
+    as for desktop view there are 3 cols used thus here col-span-full is used to place it center nicely when empty
+- 

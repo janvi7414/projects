@@ -8,7 +8,7 @@ export default function Home() {
   const [tickets, setTickets] = useState([])
   const [selectedPriority, setSelectedPriority] = useState(null)
 
-  // Fetch tickets from backend
+  // Fetching tickets from backend
   useEffect(() => {
     const fetchTickets = async () => {
       try {
@@ -43,15 +43,14 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Sidebar onFilterChange={setSelectedPriority} />
+      {/* <Sidebar onChange={setSelectedPriority} /> */}
       <main className="min-h-screen pt-20 pl-16 md:pl-64 transition-all duration-300 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center space-y-8 ">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground">Welcome to TicketMaster</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A professional ticketing app with responsive navbar, collapsible sidebar, and priority filtering.
           </p>
 
-          {/* Recent Tickets Demo */}
           <div className="mt-16">
             <h2 className="text-3xl font-bold mb-6">Recent Tickets</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
