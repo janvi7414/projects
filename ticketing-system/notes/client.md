@@ -49,4 +49,4 @@ filteredTickets = array of tickets filtered
     )} 
     here if array is empty then p is rendered 
     as for desktop view there are 3 cols used thus here col-span-full is used to place it center nicely when empty
-- 
+- space-y-6 same as gap vertically

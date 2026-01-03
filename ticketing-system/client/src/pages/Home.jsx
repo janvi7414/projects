@@ -93,7 +93,8 @@ export default function Home() {
             <h2 className="text-3xl font-bold">Key Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start gap-3 p-4">
-                <span className="text-2xl">🔔</span>
+                <span className="text-2xl">🔔
+                </span>
                 <div>
                   <h4 className="font-semibold mb-1">Notification Badge</h4>
                   <p className="text-sm text-muted-foreground">Stay updated with new ticket notifications</p>
