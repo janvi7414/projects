@@ -11,6 +11,13 @@
     - <></> is used to wrap divs instead of <div></div>
     - max-h-80 === max-h-[320px]  1rem =16px and 1rem = h-4
     - overflow: hidden Any content that exceeds the element’s bounds (width or height) is clipped and not visible.
+    - background/80  80% opacity
+    - shadow-lg box giving large shadow 
+    - backdrop-blur-md to give glassmorphism effect i.e affects the background behind the element
+    -   useEffect(() => {
+            document.documentElement.classList.toggle("dark", isDarkMode)
+        }, [isDarkMode] 
+    here document = whole DOM page global obj provided by browser documentElement = root element of html doc i.e. <html> classList = obj on every DOM that lets add, remove, toggle (add if not and remove if already added), check css classes on the class passed 
 
 ## UI
 Label | Screen breakpoint | Screen type                    | max-w-*           | text-*
