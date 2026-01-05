@@ -52,7 +52,7 @@ export default function Navbar() {
                 to={link.path}
                 className={({ isActive }) =>
                   `relative text-sm font-medium transition-colors group ${
-                    isActive ? "text-primary" : "text-foreground/70 hover:text-primary"
+                    isActive ? "text-primary" : "text-foreground hover:text-red-700 opacity-70 hover:opacity-100"
                   }`
                 }
               >
@@ -60,7 +60,7 @@ export default function Navbar() {
                   <>
                     {link.name}
                     <span
-                      className={`absolute left-0 bottom-1 h-0.5 bg-primary transition-all duration-300 ${
+                      className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300 ${
                         isActive ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                     />

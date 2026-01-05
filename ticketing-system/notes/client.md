@@ -16,8 +16,37 @@
     - backdrop-blur-md to give glassmorphism effect i.e affects the background behind the element
     -   useEffect(() => {
             document.documentElement.classList.toggle("dark", isDarkMode)
-        }, [isDarkMode] 
+        }, [isDarkMode])
     here document = whole DOM page global obj provided by browser documentElement = root element of html doc i.e. <html> classList = obj on every DOM that lets add, remove, toggle (add if not and remove if already added), check css classes on the class passed 
+    - isActive = boolean used for url to match the path if active used for NavLink
+    - Add group to the parent with group-hover variants on children this is used to add direct style to a child when parent is hovered
+    - "<div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `relative text-sm font-medium transition-colors group ${
+                    isActive ? "text-primary" : "text-foreground hover:text-red-700 opacity-70 hover:opacity-100"
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {link.name}
+                    <span
+                      className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </div>" here initially nav is hidden but for >=md it is visible as links navlink is relative and span i.e. underline is absolute to position under the text when navlink inactive but hovered it goes dark black and added underline
+
+          - 
+
 
 ## UI
 Label | Screen breakpoint | Screen type                    | max-w-*           | text-*
