@@ -45,7 +45,36 @@
             ))}
           </div>" here initially nav is hidden but for >=md it is visible as links navlink is relative and span i.e. underline is absolute to position under the text when navlink inactive but hovered it goes dark black and added underline
 
-          - 
+          -
+
+# Sidebar
+- <aside> is it same as div expect it is semantic html element, represents secondary content which is related to main content
+- "export default function Sidebar({ onFilterChange }) {...}
+      
+        const handlePriorityClick = (priority) => {
+        setActivePriority(priority)
+        if (onFilterChange) {
+          onFilterChange(priority)
+        }
+      }
+"
+here onFilterChange is the props from parent Home to child Sidebar and child is using this func and the value of priority is passed as an argument when calling the callback func to the parent
+
+- " if (onFilterChange) {
+      onFilterChange(priority)
+    }" it is checking if any prop is passed if yes then same data is passed to the parent because sidebar is used to just select the priority and home uses it to show the relevant tickets
+  
+- top=16  h-[calc(100vh-4rem)]  sidebar starts from 4rem (height of navbar) and it is tall 100vh minus 4rem which is calculated dynamically
+- z-40 below navbar as it was z-50 closest to the viewport
+- aria-label to set the label for the button here
+- -right-6 means -6 from right
+- absolute (w.r.t parent) left-full span exactly to the right edge of the button top=1/2 move span down to 50% height of button
+- whitespace-nowrap prevents text from wrapping i.e. set in one line
+- pointer-events-none this is for span that on click, hover, etc events are valid on the label text appearing
+- overflow-y: auto is content overflows gives scrollbar
+- shrink-0 does not shrink has same size shrink-1 can shrink
+- 
+
 
 
 ## UI

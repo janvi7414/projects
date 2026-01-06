@@ -3,9 +3,7 @@ import { useState } from "react"
 import { ChevronLeft, ChevronRight, Filter } from "lucide-react"
 
 export default function Sidebar({ onFilterChange }) {
-  // Sidebar collapsed state
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  // Active priority filter
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [activePriority, setActivePriority] = useState(null)
 
   // Priority filters with colors
@@ -29,28 +27,28 @@ export default function Sidebar({ onFilterChange }) {
         isCollapsed ? "w-16" : "w-64"
       }`}
     >
-      {/* Collapse/Expand Toggle Button */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        className="absolute -right-3 top-6 bg-background border border-border rounded-full p-1 hover:bg-accent transition-colors"
+        className="absolute -right-3 top-6 bg-background border border-border rounded-full p-1 hover:bg-accent transition-colors group"
       >
         {isCollapsed ? (
           <ChevronRight className="h-4 w-4 text-foreground" />
         ) : (
           <ChevronLeft className="h-4 w-4 text-foreground" />
         )}
+        <span className="  absolute left-full ml -2 top-1/2 - translate-y-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 bg-foreground text-background text-xs px-2 py-1 rounded transition-opacity pointer-events-none">
+          {isCollapsed? "Expand sidebar" : "Collapse sidebar"}
+        </span>
       </button>
 
-      {/* Sidebar Content */}
       <div className="p-4 space-y-6 overflow-y-auto h-full">
-        {/* Filter Header */}
         <div className="flex items-center gap-2">
           <Filter className="h-5 w-5 text-foreground" />
           {!isCollapsed && <h2 className="text-lg font-semibold text-foreground">Filters</h2>}
         </div>
 
-        {/* Priority Filters */}
+
         <div className="space-y-2">
           {!isCollapsed && <h3 className="text-sm font-medium text-muted-foreground mb-3">Priority</h3>}
           {priorities.map((priority) => (
@@ -63,28 +61,28 @@ export default function Sidebar({ onFilterChange }) {
                   : "hover:bg-accent text-foreground"
               } ${isCollapsed ? "justify-center" : ""}`}
             >
-              {/* Priority Color Dot */}
+
               <span className={`h-3 w-3 rounded-full ${priority.color} shrink-0`} />
-              {/* Priority Label */}
+
               {!isCollapsed && <span className="text-sm font-medium">{priority.name}</span>}
             </button>
           ))}
         </div>
 
-        {/* Additional Filter Section (Optional) */}
+
         {!isCollapsed && (
           <div className="pt-4 border-t border-border">
             <h3 className="text-sm font-medium text-muted-foreground mb-3">Status</h3>
             <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors">
+              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors ">
                 <input type="checkbox" className="rounded border-border" />
-                <span>Open</span>
+                <span group-hover:text-primary >Open</span>
               </label>
-              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors">
+              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors ">
                 <input type="checkbox" className="rounded border-border" />
                 <span>In Progress</span>
               </label>
-              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors">
+              <label className="flex items-center gap-2 text-sm cursor-pointer hover:text-primary transition-colors ">
                 <input type="checkbox" className="rounded border-border" />
                 <span>Closed</span>
               </label>

@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Sidebar onChange={setSelectedPriority} />
+      <Sidebar onFilterChange={setSelectedPriority} />
       <main className="min-h-screen pt-20 pl-16 md:pl-64 transition-all duration-300 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center space-y-8 ">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground">Welcome to TicketMaster</h1>
