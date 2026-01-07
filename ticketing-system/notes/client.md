@@ -75,6 +75,12 @@ here onFilterChange is the props from parent Home to child Sidebar and child is 
 - shrink-0 does not shrink has same size shrink-1 can shrink
 - 
 
+# CreateTicket.jsx
+- "  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }" here [] means key ...formData is a spread operator used to keep already set values and adds new values to the keys present. here formData is like a map which has key-value pairs already defined we set key with e.target.name e.g. email and value to it is set using e.target.value e.g. abc@gmail.com"
+  - 
+
 
 
 ## UI
