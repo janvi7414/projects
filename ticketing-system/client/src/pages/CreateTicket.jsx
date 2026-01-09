@@ -58,10 +58,10 @@ export default function CreateTicket() {
           )}
 
           {/* Ticket Form */}
-          <Card className="p-8 rounded-lg bg-card border border-border space-y-6">
+          <Card className="p-8 rounded-lg  border border-border space-y-6">
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Title */}
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
                 <TextField
                   fullWidth
                   label="Ticket Title"
@@ -70,10 +70,9 @@ export default function CreateTicket() {
                   value={formData.title}
                   onChange={handleChange}
                   placeholder="Brief description of the issue"
-                  className="rounded-lg"
+                  className="rounded-lg "
                 />
 
-                {/* Description */}
                 <TextField
                   fullWidth
                   label="Description"
@@ -88,7 +87,7 @@ export default function CreateTicket() {
                 />
 
                 <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Priority */}
+             
                   <FormControl fullWidth required className="rounded-lg">
                     <InputLabel id="priority-label">Priority</InputLabel>
                     <Select
