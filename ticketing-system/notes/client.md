@@ -73,7 +73,18 @@ here onFilterChange is the props from parent Home to child Sidebar and child is 
 - pointer-events-none this is for span that on click, hover, etc events are valid on the label text appearing
 - overflow-y: auto is content overflows gives scrollbar
 - shrink-0 does not shrink has same size shrink-1 can shrink
+- "if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+    setIsCollapsed(true)
+}
+"
+  sidebarRef.current → This is a reference to the sidebar DOM element.
+
+  !sidebarRef.current.contains(event.target) → Checks if the element that was clicked (event.target) is outside the sidebar.
+- ref={sidebarRef} to tell react this aside element is the sidebar so that react checks if the click is outside the sidebar or not
 - 
+
+
+
 
 # CreateTicket.jsx
 - "  const handleChange = (e) => {

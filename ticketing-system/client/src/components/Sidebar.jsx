@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Filter } from "lucide-react"
 
 export default function Sidebar({ onFilterChange }) {
-  const [isCollapsed, setIsCollapsed] = useState(true)
-  const [activePriority, setActivePriority] = useState(null)
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [activePriority, setActivePriority] = useState(null);
+  const sidebarRef = useRef(null);
 
   // Priority filters with colors
   const priorities = [
@@ -21,8 +22,24 @@ export default function Sidebar({ onFilterChange }) {
     }
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if(sidebarRef.current && !sidebarRef.current.contains(event.target)){
+        setIsCollapsed(true)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+
+    return() => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  },[])
+
+
   return (
     <aside
+      ref={sidebarRef}
       className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-background border-r border-border transition-all duration-300 z-40 ${
         isCollapsed ? "w-16" : "w-64"
       }`}
@@ -37,7 +54,7 @@ export default function Sidebar({ onFilterChange }) {
         ) : (
           <ChevronLeft className="h-4 w-4 text-foreground" />
         )}
-        <span className="  absolute left-full ml -2 top-1/2 - translate-y-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 bg-foreground text-background text-xs px-2 py-1 rounded transition-opacity pointer-events-none">
+        <span className="absolute left-full ml -2 top-1/2 - translate-y-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 bg-foreground text-background text-xs px-2 py-1 rounded transition-opacity pointer-events-none">
           {isCollapsed? "Expand sidebar" : "Collapse sidebar"}
         </span>
       </button>
