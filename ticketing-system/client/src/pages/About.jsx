@@ -1,10 +1,8 @@
-import Navbar from "../components/Navbar"
+import React from "react"
 
 export default function About() {
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen pt-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-4xl font-bold mb-8">About</h1>
           <div className="p-8 rounded-lg bg-white border border-gray-200 shadow-sm space-y-4">
@@ -23,7 +21,6 @@ export default function About() {
             </ul>
           </div>
         </div>
-      </main>
     </>
   )
 }

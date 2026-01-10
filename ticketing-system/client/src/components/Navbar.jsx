@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Moon, Sun, Menu, X, Bell } from "lucide-react";
 
 export default function Navbar() {
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -12,7 +13,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Create Ticket", path: "/create-ticket" },
-    { name: "Ticket List", path: "/ticket-list" },
+    { name: "Ticket List", path: "/tickets" },
     { name: "About", path: "/about" },
   ]
 

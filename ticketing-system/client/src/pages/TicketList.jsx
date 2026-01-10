@@ -10,7 +10,7 @@ const TicketList = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get("http://localhost:5173/tickets")
+        const res = await axios.get("http://localhost:5000/api/tickets")
         setTickets(res.data)
       } catch (err) {
         console.error("Error in fetching tickets:", err)
@@ -37,11 +37,7 @@ const TicketList = () => {
   }
 
   return (
-    <>
-      <Navbar />
-      <Sidebar onFilterChange={setSelectedPriority} />
-      <main className="min-h-screen pt-20 pl-16 md:pl-64 transition-all duration-300 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <><div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-2">Ticket List</h1>
             <p className="text-gray-600">
@@ -96,7 +92,6 @@ const TicketList = () => {
             )}
           </div>
         </div>
-      </main>
     </>
   )
 }
