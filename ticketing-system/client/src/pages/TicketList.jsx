@@ -10,10 +10,10 @@ const TicketList = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/tickets")
+        const res = await axios.get("http://localhost:5173/tickets")
         setTickets(res.data)
       } catch (err) {
-        console.error("Error fetching tickets:", err)
+        console.error("Error in fetching tickets:", err)
       }
     }
     fetchTickets()
@@ -69,7 +69,14 @@ const TicketList = () => {
                         <span>•</span>
                         <span>{ticket.status}</span>
                         <span>•</span>
-                        <span>{new Date(ticket.date).toLocaleDateString()}</span>
+                        <span>{new Date(ticket.date).toLocaleDateString(
+                          "en-IN",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}</span>
                       </div>
                     </div>
                     <div
