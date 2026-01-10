@@ -11,6 +11,7 @@ import {
   FormControl,
   InputLabel,
   Box,
+  OutlinedInput,
 } from "@mui/material"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 
@@ -86,12 +87,13 @@ export default function CreateTicket() {
                   className="rounded-lg"
                 />
 
-                <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Box className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
              
                   <FormControl fullWidth required className="rounded-lg">
                     <InputLabel id="priority-label">Priority</InputLabel>
                     <Select
                       labelId="priority-label"
+                      label="Priority"
                       name="priority"
                       value={formData.priority}
                       onChange={handleChange}
@@ -103,11 +105,12 @@ export default function CreateTicket() {
                     </Select>
                   </FormControl>
 
-                  {/* Status */}
+       
                   <FormControl fullWidth required className="rounded-lg">
                     <InputLabel id="status-label">Status</InputLabel>
                     <Select
                       labelId="status-label"
+                      label="Status"
                       name="status"
                       value={formData.status}
                       onChange={handleChange}
@@ -120,7 +123,7 @@ export default function CreateTicket() {
                   </FormControl>
                 </Box>
 
-                {/* Info Box */}
+                
                 <Box className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-start gap-3">
                   <AlertCircle className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
                   <Typography className="text-sm text-blue-500">
@@ -128,8 +131,8 @@ export default function CreateTicket() {
                   </Typography>
                 </Box>
 
-                {/* Buttons */}
-                <Box className="flex items-center gap-4">
+               
+                <Box className="flex items-center gap-4 ">
                   <Button
                     type="submit"
                     variant="contained"
