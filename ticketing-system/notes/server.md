@@ -40,6 +40,10 @@ It checks:
 - During authentication, the system identifies the user by their unique email, retrieves that user’s stored bcrypt hash, extracts the embedded salt and rounds, and then compares the entered password against that hash got after adding salt and rounds on the entered password. Also even hacker can read rounds and salt but as bcrypt is one way hacker will have to make millions of guesses to apply salt and rounds on to get the password
 - 
 
+## generateToken.js
+- "jsonwebtoken" it is an external library used to create and verify jwts
+- jwt is an object containing methods like jwt.sign(), jwt.verify()
+- 
 
 
 
