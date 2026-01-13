@@ -43,7 +43,31 @@ It checks:
 ## generateToken.js
 - "jsonwebtoken" it is an external library used to create and verify jwts
 - jwt is an object containing methods like jwt.sign(), jwt.verify()
-- 
+- "stateless" this is a primary API's architecture which uses JSON Web Token (JWT) for authentication instead of server side sessions. server doesnot save any data of user instead jwt has all the data but not sensitive info needed thus even if server fails user's session is not lost
+- when user registers or logs in if the user is valid (entery is created in DB) or the username and password matches this is termed as authentication done then JWT is generated and is sent to the client back. Frontend stores this in localstorage this is used by backend rather backend checks the data from jwt every time if the expiry is valid with other details for further authorization.
+- Flow:
+    User registers
+    Password is hashed and stored
+    User logs in
+    Authentication happens
+    JWT generated with userId
+    JWT stored on client
+    Client sends JWT in Authorization header
+    Backend verifies signature + expiry
+    Authorization checks role/permissions
+- encode = used to format the data and not for security as it can be decoded back
+- encryption = this is uses a secret key and is reversible this is not used for password either
+- hashing = this is one way and is used for security of password
+- jwt has 3 parts (header, payload, signiture) signiture = token authenticity check
+- jwt is stored by frontend and session is stored in backend thus is easy to revok
+-   jwt.sign() to create token 
+    jwt.verify() to verify
+- "const generateToken = (user) => {
+  if (!user || !user._id || !user.role) {
+    throw new Error("Invalid user data for token generation");
+  }" here func to generate token for a user where user is an obj from db if cond is used to prevent token genration for user missing any of these values
+  - 7d = 7 days
+  - jwt adds iat (issued at time) and exp (validate till) uses unix time i.e. seconds since 1 Jan 1970 (UTC) 
 
 
 
