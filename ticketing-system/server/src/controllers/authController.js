@@ -42,7 +42,7 @@ const register = async (req, res) => {
       name: name.trim(),
       email: email.toLowerCase(),
       password,
-      role: "employee", // role controlled by backend for security
+      role: "employee", // role controlled by backend for security to prevent login as admin
     });
 
     // Generate JWT token
