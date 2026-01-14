@@ -78,6 +78,139 @@ It checks:
   - 
 
 
+  ## Common types of Error codes
+  - HTTP Status Codes (Web/APIs): Used by web servers, categorized by range.
+    1xx (Informational): Request received, processing.
+    2xx (Success): 200 OK (Success).
+    3xx (Redirection): 301 Moved Permanently, 302 Found.
+    4xx (Client Error): 400 Bad Request, 401 Unauthorized, 404 Not Found, 403 Forbidden, 409 Conflict, 429 Too Many Requests.
+    5xx (Server Error): 500 Internal Server Error, 503 Service Unavailable.
+- Https Response Status Codes 1xx Series
+    100 Continuous
+    101 Change of protocol
+    102 Processing
+    Https Response Status Codes 2xx Series – Success
+    200 OK
+    201 Created
+    202 Accepted
+    203 Secondary source information
+    204 No content
+    205 Content Reset
+    206 Partial Reset
+    207 Multistate
+    Https Response Status Codes 3xx Series – Redirect
+    300 Multiple Choices
+    301 Moved permanently
+    302 found
+    303 See elsewhere
+    304 Unmodified
+    305 Use proxy
+    306 Change proxy
+    307 Temporary redirect
+    HTTP status codes 4хх Series – Web client error
+    400 bad request
+    401 Unauthorized
+    402 Payment required
+    403 Forbidden
+    404 error page not found
+    405 Unauthorized method
+    406 Unacceptable
+    407 Proxy authentication required
+    408 Request timed out
+    409 Conflict
+    410 Disappeared
+    411 Mandatory length
+    412 Precondition failed
+    413 Request entity too long
+    414 Request URL too long
+    415 Unsupported media type
+    416 Requested interval not available
+    417 Expected behavior failed
+    418 I’m a teapot
+    422 Entity cannot be processed
+    423 Locked
+    424 Failed dependencies
+    425 Unordered collection
+    426 Update needed
+    428 Necessary precondition
+    429 Too many requests
+    431 Request header fields too long
+    444 No response
+    449 Retry with (Microsoft)
+    450 Blocked by Windows Parental Controls (Microsoft)
+    451 Unavailable for legal reasons
+    HTTP status code class 5xx series – server error
+    500 Internal server error
+    501 Not implemented
+    502 Bad Gateway
+    503 Server not available
+    504 Gateway timeout expired
+    505 Unsupported version of HTTP
+    506 Variant also trades
+    507 Insufficient storage
+    509 Bandwidth limit exceeded
+    510 No extension
+    511 Network authentication required
+- 
+
+
+
+## authMiddleware.js
+- " if (
+      !req.headers.authorization ||
+      !req.headers.authorization.startsWith("Bearer ")
+    ) "
+    here first we are checking if header is missing and second checks if header is in correct formate i.e "Authorization: Bearer asdfdfdf" 
+- Bearer = the one who holds the token 
+- Authorization: <scheme> <credentials>
+  is standard HTTP header format used to send token to the server 
+- When a client (browser / app) talks to a server, every request and response has 3 parts:
+    1. Start line
+    2. Headers
+    3. Body (optional)
+e.g.
+    GET /api/tickets HTTP/1.1
+    Host: example.com
+    Authorization: Bearer abc123
+    Content-Type: application/json
+    User-Agent: Chrome/143
+header = key-value pairs that carries metadata i.e. extra info about the request and response they describes how to handle the data. This helps middleware to read easily
+    header = instruction + identity + rule
+- common header are:
+    Authorization = who is making the req
+    Content-Type = format of the body (JSON, form, etc)
+    Accept = what res format client wants
+    User-Agent = client details (browser,app)
+    Cookie = session info
+    Cache-Control = caching rules
+- schemes for Authorization
+    Basic = username: password sent in every req
+    Bearer = token proves id and token has expiry
+    Digest = uses hashing+nonce
+    ApiKey = no user specific permissions
+    cookie = server stores session browser sends cookie automatically
+    OAuth 2.0 = login via google/github
+
+- Tampering = illegally modifying data to gain unauthorized access 
+- .startsWith() to check if string starts with "Bearer"
+- .split(" ")[1]; to split stirng by spaces from index 1 as "Bearer" is at index 0
+- "    const user = await User.findById(decoded.id).select("-password");" here We attach authenticated user context to the request so all next middleware and controllers can use it without re-verifying the token or querying the DB again.
+- "const authorize = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!allowedRoles.includes(req.user.role)) {
+      return res
+        .status(403)
+        .json({ message: "Insufficient permissions" });
+    }
+    next();
+  };
+};"
+    here "..." is called rest operator i.e. it collects all passed arguments into one variable as an array here in array named allowedRoles e.g. allowedRoles = ["admin", "manager", "support"]. authorize is a higher order func i.e. it returns another func 
+
+
+
+
+
 
 
 
