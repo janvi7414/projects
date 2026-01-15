@@ -38,7 +38,14 @@ It checks:
     3. Apply hashing algorithm (10 rounds)
     4. Output final hash
 - During authentication, the system identifies the user by their unique email, retrieves that user’s stored bcrypt hash, extracts the embedded salt and rounds, and then compares the entered password against that hash got after adding salt and rounds on the entered password. Also even hacker can read rounds and salt but as bcrypt is one way hacker will have to make millions of guesses to apply salt and rounds on to get the password
-- 
+- Mongoose is an ODM (Object Data Modeling) library for MongoDB + Node.js.
+ Why Mongoose is used:
+    Schema → structure for data
+    Model → interface to interact with DB
+    Validation → data correctness
+    Middleware (hooks) → logic before/after DB actions
+    Methods & statics → reusable logic
+    Relationships → references between collections
 
 ## generateToken.js
 - "jsonwebtoken" it is an external library used to create and verify jwts
@@ -209,9 +216,18 @@ header = key-value pairs that carries metadata i.e. extra info about the request
 
 
 
+## db
+-   server.js = application entry point
+    DB must connect before server starts listening
+    app.js should stay reusable (for testing, serverless, etc.)
+- why did we use app.js and server.js separetely To separate Express configuration from server startup logic, which improves testability, scalability, and maintainability without opening the port.
+- 
 
 
-
+## server.js
+- "dotenv" reads environment variables from a .env file
+- .config() Loads variables into process.envMakes values like process.env.PORT, process.env.MONGO_URI available
+- 
 
 
 

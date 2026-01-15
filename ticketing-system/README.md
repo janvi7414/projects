@@ -27,3 +27,15 @@
     - Database: MongoDB, Mongoose
     - Utilities: dotenv, cors, nodemon
 
+
+
+
+
+
+## Rough 
+- till phase2 step4
+    User.js → schema, hashing, comparePassword 
+    generateToken.js → clean JWT payload & expiry 
+    authController.js → register + login 
+    authMiddleware.js → verifyAuth + authorize 
+
