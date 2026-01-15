@@ -221,13 +221,49 @@ header = key-value pairs that carries metadata i.e. extra info about the request
     DB must connect before server starts listening
     app.js should stay reusable (for testing, serverless, etc.)
 - why did we use app.js and server.js separetely To separate Express configuration from server startup logic, which improves testability, scalability, and maintainability without opening the port.
+- db connection is async
 - 
 
 
 ## server.js
 - "dotenv" reads environment variables from a .env file
 - .config() Loads variables into process.envMakes values like process.env.PORT, process.env.MONGO_URI available
-- 
+- app.listen() starts accepting incoming req
+-   What errors can occur here
+    MongoDB unreachable
+    Invalid connection string
+    Authentication failure
+    Network error
+- process.exit(1) immediately terminates Node.js process
+- silent crash = app fails and error is unknown
+- startServer() is not exported as module.exports as this is the not reused in other file but is executed directly at entry point
+- require ("express") Imports the Express framework
+Express is responsible for:
+    routing
+    middleware handling
+    request/response lifecycle
+- app.use(express.json()) For every incoming HTTP request, if the request body is JSON, parse it and make it available as req.body. use() registers middleware. express.json() is a built-in middleware func 
+- JSON (Javascript Object Notation) = It is a text-based data format used to send andreceive data between:frontend ↔ backend, backend ↔ backend, APIs ↔ clients It is language-independent, even though it looks like JavaScript. Supported everywhere (JS, Java, Python, Go, etc.)
+- Rules of JSON
+    Keys must be in double quotes
+    Values can be:
+        string
+        number
+        boolean
+        array
+        object
+        null
+        ❌ No functions
+        ❌ No comments
+- Parsing = converting raw text into a structured, usable format
+- flow:
+    express checks req headers and searched for Content-Type: application/json
+    if found reads raw req stream and converts this JSON into js object and attaches this to req.body
+    implements next middleware/route
+- .use() applies to all HTTP methods
+.get() only applies to GET
+.post() only applies to POST 
+- express.json() does not parse form-data, multipart uploads, url-encoded data for these we need "app.use(express.urlencoded({ extended: true }));". for image and large payloads we use limit as "app.use(express.json({ limit: "10mb" }));"
 
 
 
