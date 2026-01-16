@@ -13,6 +13,9 @@ It checks:
     Role (user, admin)
     Rate limits
     Validation
+- In production, the backend runs on a stable server with a fixed IP, which is whitelisted once in MongoDB Atlas. The database remains continuously accessible, so the server automatically connects at startup without manual intervention. The IP issue is only common during local development.
+- 
+
 
 # User.js
 - trim: true to avoid unnecessary spaces in name

@@ -14,6 +14,7 @@ import {
   OutlinedInput,
 } from "@mui/material"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
+import axios from "axios"
 
 export default function CreateTicket() {
   const [formData, setFormData] = useState({
@@ -24,16 +25,32 @@ export default function CreateTicket() {
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Ticket submitted:", formData)
-    setIsSubmitted(true)
+try{
+  const res = await axios.post("http://localhost:5000/api/tickets", formData,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ title: "", description: "", priority: "medium", status: "open" })
-    }, 3000)
+  console.log("Saved ticket:", res.data)
+  setIsSubmitted(true)
+
+  setTimeout(() => {
+    setIsSubmitted(false)
+    setFormData({
+       title: "",
+       description: "",
+       priority: "medium",
+       status: "open" })
+  }, 3000)
+
+}catch(err){
+  console.error("Ticket creation failed:", err.response?.data || err.message)
+}
   }
 
   const handleChange = (e) => {
