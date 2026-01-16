@@ -239,9 +239,10 @@ header = key-value pairs that carries metadata i.e. extra info about the request
 - startServer() is not exported as module.exports as this is the not reused in other file but is executed directly at entry point
 - require ("express") Imports the Express framework
 Express is responsible for:
+    creating server
     routing
     middleware handling
-    request/response lifecycle
+    request/response lifecycle (GET, POST, PUT. DELETE)
 - app.use(express.json()) For every incoming HTTP request, if the request body is JSON, parse it and make it available as req.body. use() registers middleware. express.json() is a built-in middleware func 
 - JSON (Javascript Object Notation) = It is a text-based data format used to send andreceive data between:frontend ↔ backend, backend ↔ backend, APIs ↔ clients It is language-independent, even though it looks like JavaScript. Supported everywhere (JS, Java, Python, Go, etc.)
 - Rules of JSON
@@ -263,8 +264,37 @@ Express is responsible for:
 - .use() applies to all HTTP methods
 .get() only applies to GET
 .post() only applies to POST 
+- router.use() applies middleware to all the routes inside the router
 - express.json() does not parse form-data, multipart uploads, url-encoded data for these we need "app.use(express.urlencoded({ extended: true }));". for image and large payloads we use limit as "app.use(express.json({ limit: "10mb" }));"
+- const PORT = process.env.PORT || 5000; works locally as well as in cloud assigned port
 
+
+
+## app.js
+- app represents entire backend's server
+- cors = cross Origin resource sharing. browser blocks req between different origins by default this middleware tells browserr to allow req from provided origin.
+- A router decides what code should run when a specific API URL is requested. Express provides routers by default, and we can create multiple routers for different purposes, such as features or user roles. By using routers along with middleware, we can allow or restrict access to certain routes so that users can only access the routes meant for their role.
+- app.use("/tickets", ticketRoutes); Any request whose URL starts with /tickets will be handled by ticketRoutes.
+
+## ticketRoutes.js
+- "const {
+  getTickets,
+  getTicketById,
+  createTicket,
+  updateTicket,
+  deleteTicket,
+} = require("../controllers/ticketController");" here we are importing multiple logic functions form ticketcontroller.js
+- "router.route("/")
+  .get(getTickets)
+  .post(createTicket)"
+  here router.route() it groups multiple HTTP methods for the same URL rather than writing separate router.get("/") and router.post("/")
+  - 
+
+
+  ## ticketController.js
+  - "Ticket.find().sort({ createdAt: -1 })" to fetch all ticket documents form MongoDB in latest first descending order
+  - Object.assign() = Copies values from req.body to ticket, Updates only provided fields
+  - Controllers contain business logic. They receive requests from routes, interact with the database using models, handle validations, and send appropriate HTTP responses.
 
 
 
