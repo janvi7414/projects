@@ -13,7 +13,7 @@ import {
   Box,
   OutlinedInput,
 } from "@mui/material"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, AlignStartVertical, CheckCircle2 } from "lucide-react"
 import axios from "axios"
 
 export default function CreateTicket() {
@@ -28,13 +28,21 @@ export default function CreateTicket() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 try{
+  
+  const token = localStorage.getItem("token");
+  if (!token) {
+    AlignStartVertical("You must be logged in to create a ticket");
+    return;
+  } 
   const res = await axios.post("http://localhost:5000/api/tickets", formData,
     {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     }
   )
+
 
   console.log("Saved ticket:", res.data)
   setIsSubmitted(true)

@@ -49,4 +49,9 @@ in .env
 - edited vite.config.js with code on official site and imported "@import "tailwindcss";" in index.css
 -npm install lucide-react //for icons
 
+# for backend
+-npm install jsonwebtoken
+-npm install bcryptjs
+-
+
 

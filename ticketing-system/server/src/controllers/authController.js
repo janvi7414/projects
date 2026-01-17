@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/UserModle");
 const generateToken = require("../utils/generateToken");
 
 // Register new user

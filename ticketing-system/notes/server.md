@@ -300,5 +300,6 @@ Express is responsible for:
   - Controllers contain business logic. They receive requests from routes, interact with the database using models, handle validations, and send appropriate HTTP responses.
 
 
-
-
+## userRoutes.js
+- router.get("/me", verifyAuth, (req, res) here verifyAuth from authMiddleware runs before the get req as  express is executed left to right. Thus only verified user reaches /me route
+- 
