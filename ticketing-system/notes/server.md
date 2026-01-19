@@ -303,3 +303,8 @@ Express is responsible for:
 ## userRoutes.js
 - router.get("/me", verifyAuth, (req, res) here verifyAuth from authMiddleware runs before the get req as  express is executed left to right. Thus only verified user reaches /me route
 - 
+
+
+## authRoutes.js
+- This file is responsible to redirect to routes for registration and login whose logic is present in authController.js
+- 
